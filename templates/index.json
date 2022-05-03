@@ -1,0 +1,148 @@
+{
+  "sections": {
+    "section-hero": {
+      "type": "section-hero",
+      "settings": {
+      }
+    },
+    "section-content-cards": {
+      "type": "section-content-cards",
+      "blocks": {
+        "89c146f3-f2ef-4b1c-9b59-c6b7736037aa": {
+          "type": "card",
+          "settings": {
+            "card-image": "shopify:\/\/shop_images\/Rectangle_289.jpg",
+            "card-color": "#00966e",
+            "card-title": "Make a scene.",
+            "card-description": "Everything you need for a great party, from decor to drinks and games.",
+            "card-link-text": "Find your scene",
+            "card-link-url": "shopify:\/\/products\/futurecyborg"
+          }
+        },
+        "c0d7b317-758e-4047-b930-60e1ae80c2e3": {
+          "type": "card",
+          "settings": {
+            "card-image": "shopify:\/\/shop_images\/Rectangle_289_10f9c8e7-f05b-4992-914c-849cdfe7af94.jpg",
+            "card-color": "#85abbd",
+            "card-title": "Make it extra.",
+            "card-description": "Everything you need for a great party, from decor to drinks and games.",
+            "card-link-text": "Shop party supplies",
+            "card-link-url": "shopify:\/\/products\/millionaire-in-the-waiting"
+          }
+        },
+        "221b1080-2345-47a2-8e6c-a20952ceb32a": {
+          "type": "card",
+          "settings": {
+            "card-image": "shopify:\/\/shop_images\/Rectangle_2891.jpg",
+            "card-color": "#e3ff21",
+            "card-title": "Make it joyful.",
+            "card-description": "Everything you need for a great party, from decor to drinks and games.",
+            "card-link-text": "Shop florals",
+            "card-link-url": ""
+          }
+        },
+        "a5a2512e-c847-4f63-82e4-75a4eb2cdf1e": {
+          "type": "card",
+          "settings": {
+            "card-image": "shopify:\/\/shop_images\/Rectangle_2892.jpg",
+            "card-color": "#bf91c4",
+            "card-title": "Make it happen.",
+            "card-description": "Everything you need for a great party, from decor to drinks and games.",
+            "card-link-text": "Browse vendors",
+            "card-link-url": "shopify:\/\/products\/overstimulation"
+          }
+        }
+      },
+      "block_order": [
+        "89c146f3-f2ef-4b1c-9b59-c6b7736037aa",
+        "c0d7b317-758e-4047-b930-60e1ae80c2e3",
+        "221b1080-2345-47a2-8e6c-a20952ceb32a",
+        "a5a2512e-c847-4f63-82e4-75a4eb2cdf1e"
+      ],
+      "settings": {
+        "headline": "Having fun"
+      }
+    },
+    "section-content-module": {
+      "type": "section-content-module",
+      "blocks": {
+        "165150002838192f79-0": {
+          "type": "module",
+          "settings": {
+            "module-image": "shopify:\/\/shop_images\/Rectangle_324.jpg",
+            "module-title": "Housewarming Gifts for the Host",
+            "module-link-text": "Discover them all",
+            "module-link-url": ""
+          }
+        },
+        "165150002838192f79-1": {
+          "type": "module",
+          "settings": {
+            "module-image": "shopify:\/\/shop_images\/Rectangle_324_9192cdb3-7be7-442d-a1cd-1b90572cbab1.jpg",
+            "module-title": "Limited Edition Holiday Scene",
+            "module-link-text": "Shop the Scene",
+            "module-link-url": "shopify:\/\/products\/futurecyborg"
+          }
+        }
+      },
+      "block_order": [
+        "165150002838192f79-0",
+        "165150002838192f79-1"
+      ],
+      "settings": {
+      }
+    },
+    "section-two-columns": {
+      "type": "section-two-columns",
+      "blocks": {
+        "97de9e09-4f86-4e13-91af-362ed99304e6": {
+          "type": "block",
+          "settings": {
+          }
+        },
+        "e0262033-510b-4288-8c4e-52f94e574f91": {
+          "type": "block",
+          "settings": {
+          }
+        },
+        "b7454ffc-a3e3-4f52-9743-6203d8b4083e": {
+          "type": "block",
+          "settings": {
+          }
+        },
+        "f54d8756-b9b1-4e2d-b864-f0d848146e21": {
+          "type": "block",
+          "settings": {
+          }
+        }
+      },
+      "block_order": [
+        "97de9e09-4f86-4e13-91af-362ed99304e6",
+        "e0262033-510b-4288-8c4e-52f94e574f91",
+        "b7454ffc-a3e3-4f52-9743-6203d8b4083e",
+        "f54d8756-b9b1-4e2d-b864-f0d848146e21"
+      ],
+      "settings": {
+        "mobile-only": false,
+        "title": "Make a scene",
+        "subtitle": "No occasion necessary.",
+        "main-image": "shopify:\/\/shop_images\/two-columns_2x_a975dc9f-0164-4b1f-80a9-2528915f8938.jpg",
+        "bg-color": "#730503"
+      }
+    },
+    "section-featured-products": {
+      "type": "section-featured-products",
+      "settings": {
+        "headline": "Party A La Carte",
+        "collection": "frontpage"
+      }
+    }
+  },
+  "order": [
+    "section-hero",
+    "section-content-cards",
+    "section-content-module",
+    "section-two-columns",
+    "section-featured-products"
+  ]
+}

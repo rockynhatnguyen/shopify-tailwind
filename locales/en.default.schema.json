@@ -16,10 +16,15 @@
     "button": {
       "text": "Button text",
       "url": "Button URL"
-    },
-    "404": {
-      "title": "Not found",
-      "subtext_html": "The page you were looking for does not exist"
+    }
+  },
+  "settings_schema": {
+    "custom_settings": {
+      "name": "Custom settings",
+      "settings": {
+        "header": "About JSON settings",
+        "paragraph": "The settings_schema.json file controls the content of the Theme settings area of the theme editor. Settings in this file translate to global theme settings, which can be accessed through the Liquid settings object. [Learn more](https://shopify.dev/themes/architecture/settings)"
+      }
     }
   },
   "sections": {
@@ -43,6 +48,17 @@
       "name": "Mobile Navigation",
       "settings": {}
     },
+    "announcement-bar": {
+      "name": "Announcement bar",
+      "settings": {
+        "show-announcement-bar": "Show Announcement bar",
+        "show-only-on-home-page": "Show only on home page"
+      }
+    },
+    "banner": {
+      "name": "Banner",
+      "settings": {}
+    },
     "collection": {
       "name": "Collection",
       "settings": {
@@ -64,6 +80,16 @@
     "image-row": {
       "name": "Image row",
       "settings": {}
+    },
+    "newsletter": {
+      "name": "Newsletter",
+      "settings": {}
+    },
+    "quotes": {
+      "name": "Quotes",
+      "settings": {
+        "quote": "Quote"
+      }
     }
   }
 }

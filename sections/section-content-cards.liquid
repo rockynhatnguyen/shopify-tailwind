@@ -1,0 +1,126 @@
+<!-- Content Cards Section -->
+<!-- Features: Liquid Loops, Image Pickers, Color Pickers, Text Configuration Options, Repeatable Blocks, Input Information, and Placeholder Content -->
+<!-- Plugins: Flickity Carousel -->
+
+<div class="max-w-screen-2xl mx-auto mb-16">
+    {% if section.settings.headline %}
+      <div class="text-5xl lg:text-8xl font-display font-light line-height-[80px] text-center uppercase mb-6 md:mb-12">
+        {{ section.settings.headline }}
+      </div>
+    {% endif %}
+  
+    <div class="card-carousel grid md:grid-cols-2 lg:grid-cols-4 gap-x-2">
+          {% for block in section.blocks %}
+            {% render 'section-card',
+              image: block.settings.card-image
+              color: block.settings.card-color
+              title: block.settings.card-title
+              desc: block.settings.card-description
+              linkText: block.settings.card-link-text
+              linkUrl: block.settings.card-link-url
+            %}
+          {% endfor %}
+    </div>
+  </div>
+  
+  {% schema %}
+  {
+    "name": "Content Cards",
+    "settings": [
+      {
+        "type": "text",
+        "id": "headline",
+        "label": "t:general.headline",
+        "default": "Make a scene."
+      }
+    ],
+    "blocks": [
+      {
+        "type": "card",
+        "name": "Card",
+        "limit": 4,
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "card-image",
+            "label": "t:general.image"
+          },
+          {
+            "type": "color",
+            "id": "card-color",
+            "label": "t:general.color"
+          },
+          {
+            "type": "text",
+            "id": "card-title",
+            "label": "t:general.title",
+            "default": "Make a scene."
+          },
+          {
+            "type": "text",
+            "id": "card-description",
+            "label": "t:general.description",
+            "default": "Everything you need for a great party, from decor to drinks and games."
+          },
+          {
+            "type": "text",
+            "id": "card-link-text",
+            "label": "t:general.link.text",
+            "default": "Find your scene"
+          },
+          {
+            "type": "url",
+            "id": "card-link-url",
+            "label": "t:general.link.url"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Content Cards",
+        "category": "Cards",
+        "blocks": [
+          {
+            "type": "card"
+          },
+          {
+            "type": "card"
+          },
+          {
+            "type": "card"
+          },
+          {
+            "type": "card"
+          }
+        ]
+      }
+    ]
+  }
+  {% endschema %}
+  
+  <script>
+    var flkty = new Flickity( '.card-carousel', {
+      // options
+      cellAlign: 'left',
+      contain: true,
+      draggable: true,
+      pageDots: false,
+      watchCSS: true
+    });
+  </script>
+  
+  {% stylesheet %}
+    /* enable Flickity by default */
+    .card-carousel:after {
+      content: 'flickity';
+      display: none; /* hide :after */
+    }
+  
+    @media screen and ( min-width: 1024px ) {
+      /* disable Flickity for large devices */
+      .card-carousel:after {
+        content: '';
+      }
+    }
+  {% endstylesheet %}

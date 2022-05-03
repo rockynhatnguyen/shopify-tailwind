@@ -1,0 +1,68 @@
+<!-- Content Module Section -->
+<!-- Schema Features: Image Pickers, Text Configuration Options, Repeatable Blocks, Input Information, and Placeholder Content -->
+<div class="max-w-screen-2xl mx-auto mb-12 md:mb-24">
+  
+    <div class="grid lg:grid-cols-2 gap-x-2 gap-y-4 lg:gap-y-0">
+          {% for block in section.blocks %}
+            {% render 'section-module',
+              image: block.settings.module-image
+              title: block.settings.module-title
+              linkText: block.settings.module-link-text
+              linkUrl: block.settings.module-link-url
+            %}
+          {% endfor %}
+    </div>
+
+</div>
+  
+  {% schema %}
+  {
+    "name": "Content Modules",
+    "settings": [],
+    "blocks": [
+      {
+        "type": "module",
+        "name": "Module",
+        "limit": 2,
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "module-image",
+            "label": "t:general.image"
+          },
+          {
+            "type": "text",
+            "id": "module-title",
+            "label": "t:general.title",
+            "default": "Housewarming Gifts for the Host"
+          },
+          {
+            "type": "text",
+            "id": "module-link-text",
+            "label": "t:general.link.text",
+            "default": "Discover them all"
+          },
+          {
+            "type": "url",
+            "id": "module-link-url",
+            "label": "t:general.link.url"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Content Modules",
+        "category": "Content",
+        "blocks": [
+          {
+            "type": "module"
+          },
+          {
+            "type": "module"
+          }
+        ]
+      }
+    ]
+  }
+  {% endschema %}

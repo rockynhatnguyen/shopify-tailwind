@@ -1,1 +1,1 @@
-// Put your application javascript here
+// Bundled and minified javascript here

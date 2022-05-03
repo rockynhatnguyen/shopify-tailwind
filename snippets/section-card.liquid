@@ -1,0 +1,39 @@
+<div class="{{ class | default: '' }} carousel-cell w-[70%] lg:w-full flex flex-col mr-4 p-2 text-center" style="{{ style | default: '' }}; background-color: {{color}};">
+    {% if image %}
+      <img
+        sizes="
+          (min-width: 1536px) 500px,
+          (min-width: 1280px) 400px,
+          (min-width: 1024px) 350px,
+          (min-width: 768px) 350px,
+          (min-width: 640px) 300px,
+          500px
+        "
+        srcset="
+          {{ image | img_url: '300x' }} 300w,
+          {{ image | img_url: '350x' }} 350w,
+          {{ image | img_url: '400x' }} 400w,
+          {{ image | img_url: '500x' }} 500w
+        "
+        src="{{ image | img_url: '500x' }}"
+        alt="{{ image.alt }}"
+        loading="lazy"
+        class="w-full h-[180px] md:min-h-[160px] lg:min-h-[224px] lg:max-h-[250px] object-cover object-center"
+      >
+    {% else %}
+      {{ 'image' | placeholder_svg_tag: 'w-full border' }}
+    {% endif %}
+    <div class="w-full px-3 pb-10 lg:pt-0 lg:pb-14">
+      {% if title %}
+        <h3 class="font-display font-light text-4xl mt-7 py-2">{{ title }}</h3>
+      {% endif %}
+      {% if desc %}
+        <p class="font-super font-normal text-sm leading-[18px] mb-3 px-3 lg:px-10">{{ desc }}</p>
+      {% endif %}
+      {% if linkText %}
+        <span>
+          <a class="font-platform font-medium text-xs uppercase border-b-2 border-black tracking-widest py-2" href="{{ linkUrl }}">{{ linkText }}</a>
+        </span>
+        {% endif %}
+    </div>
+  </div>

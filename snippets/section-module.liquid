@@ -1,0 +1,39 @@
+<!-- Module Component for Content Module Section -->
+<div class="{{ class | default: '' }}relative w-full h-[420px] lg:h-[800px] flex flex-col text-center" style="{{ style | default: '' }}">
+  {% if image %}
+    <img
+      sizes="
+        (min-width: 1536px) 1200px,
+        (min-width: 1280px) 1000px,
+        (min-width: 1024px) 750px,
+        (min-width: 768px) 650px,
+        (min-width: 640px) 500px,
+        700px
+      "
+      srcset="
+        {{ image | img_url: '500x' }} 300w,
+        {{ image | img_url: '650x' }} 350w,
+        {{ image | img_url: '750x' }} 400w,
+        {{ image | img_url: '1000x' }} 500w
+      "
+      src="{{ image | img_url: '1200x' }}"
+      alt="{{ image.alt }}"
+      loading="lazy"
+      class="w-full h-full object-cover object-center"
+    >
+  {% else %}
+    {{ 'image' | placeholder_svg_tag: 'w-full border' }}
+  {% endif %}
+  <div class="absolute inset-0">
+    <div class="absolute left-0 bottom-6 lg:bottom-10 w-full px-3 pb-4 lg:px-14 lg:py-2">
+      {% if title %}
+        <h3 class="font-display font-light text-white text-4xl lg:text-7xl leading-8 lg:leading-[4rem] mt-7 py-2">{{ title }}</h3>
+      {% endif %}
+      {% if linkText %}
+        <span class="my-2">
+          <a class="font-platform text-xs text-white uppercase border-b-2 border-white tracking-widest py-2" href="{{linkUrl}}">{{ linkText }}</a>
+        </span>
+        {% endif %}
+    </div>
+  </div>
+</div>

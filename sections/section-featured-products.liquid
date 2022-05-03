@@ -1,0 +1,155 @@
+<!-- Featured Products Section -->
+<!-- Features: Liquid Arrays, Loops, Object Manipulation, Text Configuration Options, and Placeholder Content -->
+<!-- Plugins: Flickity Carousel -->
+
+<div class="max-w-screen-2xl mx-auto pb-8">
+  {% if section.settings.headline %}
+    <div class="text-5xl lg:text-8xl font-display font-light line-height-[80px] text-center uppercase">
+      {{ section.settings.headline }}
+    </div>
+  {% endif %}
+
+  {% if section.settings.collection != blank %}
+  {% assign products = section.settings.collection.products %}
+    <!--Comment: onClick of Product, item is added to Cart, response returned in console -->
+    <!--Comment: Visual response from Mini Cart can be triggered within addToCart function -->
+    <!--Comment: Function addToCart can be extrapolated to global level if required -->
+    <div class="product-carousel w-full lg:px-16" x-data="{ 
+      qty: 1,
+      addToCart(){
+        let formData = new FormData($refs.product_form);
+
+        fetch('/cart/add.js', {
+          method: 'POST',
+          body: formData
+        })
+        .then(response => {
+          return response.json();
+        })
+        .then(response => {
+          console.log(response);
+        })
+        .catch(error => {
+          console.error('Error', error);
+        })
+      }
+    }">
+      {% for product in products %}
+
+        <!-- Product Carousel Cell Start -->
+        <div class="product-carousel-cell bg-white mx-[2px]">
+          {%- form 'product', product, class: 'form', novalidate: 'novalidate', x-ref: 'product_form' -%}
+            <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+              <div class="w-full" @click="addToCart()">
+                {% if product.featured_image != blank %}
+                  <img
+                    sizes="
+                      (min-width: 1536px) 500px,
+                      (min-width: 1280px) 400px,
+                      (min-width: 1024px) 350px,
+                      (min-width: 768px) 350px,
+                      (min-width: 640px) 300px,
+                      500px
+                    "
+                    srcset="
+                      {{ product.featured_image | img_url: '300x' }} 300w,
+                      {{ product.featured_image | img_url: '350x' }} 350w,
+                      {{ product.featured_image | img_url: '400x' }} 400w,
+                      {{ product.featured_image | img_url: '500x' }} 500w
+                    "
+                    src="{{ product.featured_image | img_url: '500x' }}"
+                    alt="{{ product.featured_image.alt }}"
+                    loading="lazy"
+                    class="w-full h-[200px] md:min-h-[300px] lg:min-h-[315px] lg:max-h-[400px] object-cover object-center"
+                  >
+                {% else %}
+                  {{ 'image' | placeholder_svg_tag: 'w-full border' }}
+                {% endif %}
+                <div class="flex justify-between items-center">
+                  <div class="font-display font-light text-xl italic px-6 py-4">{{ product.title }}</div>
+                  <div class="font-platform font-normal text-lg px-6 py-4">{{ product.price | money }}</div>
+                </div>
+              </div>
+              <!-- Product Carousel Cell End -->
+
+          {%- endform -%}
+        </div>
+
+      {% endfor %}
+    </div>
+    <div class="w-full mx-auto flex justify-center mt-10 pb-10">
+      <a href="{{ section.settings.collection.url }}" class="font-platform font-medium text-base tracking-widest uppercase my-6 border-black border-b-[1px] border-solid">Shop All</a>
+    </div>
+  {% endif %}
+</div>
+  
+{% schema %}
+  {
+    "name": "Featured Products",
+    "settings": [
+      {
+        "type": "text",
+        "id": "headline",
+        "label": "t:general.headline",
+        "default": "Party A La Carte"
+      },
+      {
+        "type": "collection",
+        "id": "collection",
+        "label": "Collection"
+      }
+    ]
+  }
+{% endschema %}
+
+<script>
+  var flktyProducts = new Flickity( '.product-carousel', {
+    contain: true,
+    draggable: true,
+    pageDots: false,
+    watchcss: true,
+    wrapAround: true
+  } );
+
+  var previousArrow = document.querySelector('.product-carousel .flickity-button.previous');
+  previousArrow.innerHTML = `<svg width="31" height="16" viewBox="0 0 31 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M4.28583 10.3562C5.78915 11.5625 7.38489 13.2686 8.57061 15.2561L9.42939 14.7438C8.17511 12.6413 6.49586 10.8474 4.91168 9.57622C4.11919 8.9403 3.3421 8.42842 2.64428 8.07299C2.59649 8.04865 2.54882 8.02491 2.50129 8.00181C2.54839 7.97907 2.59565 7.9557 2.64302 7.93174C3.341 7.57871 4.1183 7.06961 4.9111 6.43537C6.49592 5.16752 8.1757 3.373 9.43022 1.25472L8.56979 0.745151C7.3843 2.74688 5.78909 4.45236 4.28641 5.6545C3.53546 6.25526 2.8159 6.72366 2.19168 7.03939C1.55339 7.36223 1.06438 7.49994 0.76001 7.49994L0.76001 8.49994C1.06332 8.49994 1.5517 8.63874 2.19042 8.96407C2.81479 9.28208 3.53457 9.75333 4.28583 10.3562Z" fill="black"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M31 8.5L1 8.49999L1 7.49999L31 7.5L31 8.5Z" fill="black"/>
+</svg>`
+  var nextArrow = document.querySelector('.product-carousel .flickity-button.next');
+  nextArrow.innerHTML = `<svg width="31" height="16" viewBox="0 0 31 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M26.7142 5.64384C25.2109 4.43753 23.6151 2.73144 22.4294 0.743896L21.5706 1.25623C22.8249 3.35869 24.5041 5.15259 26.0883 6.42378C26.8808 7.0597 27.6579 7.57158 28.3557 7.92701C28.4035 7.95135 28.4512 7.97509 28.4987 7.99819C28.4516 8.02093 28.4044 8.0443 28.357 8.06826C27.659 8.42129 26.8817 8.93039 26.0889 9.56463C24.5041 10.8325 22.8243 12.627 21.5698 14.7453L22.4302 15.2548C23.6157 13.2531 25.2109 11.5476 26.7136 10.3455C27.4645 9.74474 28.1841 9.27634 28.8083 8.96061C29.4466 8.63777 29.9356 8.50006 30.24 8.50006V7.50006C29.9367 7.50006 29.4483 7.36126 28.8096 7.03593C28.1852 6.71792 27.4654 6.24668 26.7142 5.64384Z" fill="black"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M0 7.5L30 7.5L30 8.5L-8.74228e-08 8.5L0 7.5Z" fill="black"/>
+</svg>`
+</script>
+  
+{% stylesheet %}
+  /* enable Flickity by default */
+  .product-carousel-cell {
+    width: 70%;
+    min-height: 300px;
+  }
+
+  .product-carousel .flickity-button {
+    display: none;
+  }
+
+  @media screen and ( min-width: 768px ) {
+    .product-carousel-cell {
+      width: 33.3%;
+    }
+
+    .product-carousel .flickity-button {
+      display: flex;
+      background-color: transparent;
+    }
+
+    .product-carousel .flickity-button:hover {
+      background-color: transparent;
+    }
+
+    .product-carousel .flickity-button:focus {
+      box-shadow: 0 0 0 0;
+    }
+  }
+{% endstylesheet %}

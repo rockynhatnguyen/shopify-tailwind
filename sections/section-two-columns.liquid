@@ -1,0 +1,172 @@
+<!-- Two Columns Section -->
+<!-- Plugins: Flickity Carousel -->
+
+<div class="{% if section.settings.mobile-only %}md:hidden {% endif %}flex flex-col max-w-screen-2xl w-full mx-auto lg:flex-row mb-16">
+  <div class="w-full lg:w-1/2 min-h-[320px] lg:min-h-[600px] flex flex-col justify-center items-center object-center object-cover bg-cover bg-center bg-no-repeat" style="background-image: url({{section.settings.main-image | img_url: '800x' }});">
+    {% if section.settings.title %}
+      <div class="font-sugar font-normal text-[#E3FF21] text-8xl lg:text-10xl leading-[80px] text-center px-6 md:mb-8">
+        {{ section.settings.title }}
+      </div>
+    {% endif %}
+    {% if section.settings.subtitle %}
+      <div class="font-display font-light text-[#E3FF21] text-6xl lg:text-8xl leading-[50px] lg:leading-[80px] text-center px-6 mb-6 md:mb-8">
+        {{ section.settings.subtitle }}
+      </div>
+    {% endif %}
+  </div>
+
+  <div class="w-full lg:w-1/2 min-h-[320px] lg:min-h-[600px] flex flex-col justify-center items-center" style="{{ style | default: '' }}; background-color: {{section.settings.bg-color}};">
+    <div class="w-full flex justify-center mt-10 mb-6">
+      <h3 class="font-platform font-medium text-white text-2xl tracking-widest uppercase mx-3">The Scene</h3>
+      <h3 class="font-display text-white text-3xl italic mx-3 -mt-2">Supper Club</h3>
+    </div>
+    <div class="two-columns-carousel w-1/2 min-h-[180px] h-[340px] lg:h-full mx-auto">
+          {% for block in section.blocks %}
+            {% render 'section-circle',
+              image: block.settings.block-image
+              linkText: block.settings.block-link-text
+              linkUrl: block.settings.block-link-url
+            %}
+          {% endfor %}
+    </div>
+  </div>
+</div>
+  
+  {% schema %}
+  {
+    "name": "Two Columns",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "mobile-only",
+        "label": "Mobile Only",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title",
+        "default": "Make a scene"
+      },
+      {
+        "type": "text",
+        "id": "subtitle",
+        "label": "Subtitle",
+        "default": "No occasion necessary."
+      },
+      {
+        "type": "image_picker",
+        "id": "main-image",
+        "label": "Main Image"
+      },
+      {
+        "type": "color",
+        "id": "bg-color",
+        "label": "t:general.color",
+        "default": "#730503"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "block",
+        "name": "Block",
+        "limit": 6,
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "block-image",
+            "label": "t:general.image"
+          },
+          {
+            "type": "text",
+            "id": "block-link-text",
+            "label": "t:general.link.text",
+            "default": "Shop Now"
+          },
+          {
+            "type": "url",
+            "id": "block-link-url",
+            "label": "t:general.link.url"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Content Blocks",
+        "category": "Content",
+        "blocks": [
+          {
+            "type": "block"
+          },
+          {
+            "type": "block"
+          },
+          {
+            "type": "block"
+          },
+          {
+            "type": "block"
+          }
+        ]
+      }
+    ]
+  }
+  {% endschema %}
+  
+  <script>
+    // Initialize the Two Columns Flickity Carousel
+    var flkty = new Flickity( '.two-columns-carousel', {
+      // options
+      contain: true,
+      draggable: true,
+      pageDots: false,
+      wrapAround: true
+    });
+
+    // Replace default Flickity Arrows
+    var previousArrow = document.querySelector('.two-columns-carousel .flickity-button.previous');
+    previousArrow.innerHTML = `<svg width="34" height="18" viewBox="0 0 34 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M4.70059 11.6506C6.34939 13.0077 8.09955 14.9271 9.40002 17.1631L10.3419 16.5867C8.96625 14.2214 7.12448 12.2033 5.387 10.7732C4.51782 10.0578 3.66553 9.48194 2.90018 9.08209C2.84776 9.0547 2.79547 9.028 2.74335 9.002C2.79501 8.97642 2.84684 8.95013 2.8988 8.92317C3.66432 8.52602 4.51685 7.95328 5.38637 7.23976C7.12455 5.81343 8.9669 3.79459 10.3428 1.41153L9.39912 0.838265C8.09891 3.0902 6.34932 5.00887 4.70122 6.36129C3.8776 7.03714 3.0884 7.56409 2.40378 7.91928C1.70372 8.28248 1.16738 8.4374 0.833558 8.4374L0.833558 9.5624C1.16622 9.5624 1.70187 9.71856 2.4024 10.0845C3.08719 10.4423 3.87662 10.9725 4.70059 11.6506Z" fill="white"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M34 9.5625L1.09677 9.56249L1.09677 8.43749L34 8.4375L34 9.5625Z" fill="white"/>
+</svg>`
+    var nextArrow = document.querySelector('.two-columns-carousel .flickity-button.next');
+    nextArrow.innerHTML = `<svg width="31" height="16" viewBox="0 0 31 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M26.7142 5.64384C25.2109 4.43753 23.6151 2.73144 22.4294 0.743896L21.5706 1.25623C22.8249 3.35869 24.5041 5.15259 26.0883 6.42378C26.8808 7.0597 27.6579 7.57158 28.3557 7.92701C28.4035 7.95135 28.4512 7.97509 28.4987 7.99819C28.4516 8.02093 28.4044 8.0443 28.357 8.06826C27.659 8.42129 26.8817 8.93039 26.0889 9.56463C24.5041 10.8325 22.8243 12.627 21.5698 14.7453L22.4302 15.2548C23.6157 13.2531 25.2109 11.5476 26.7136 10.3455C27.4645 9.74474 28.1841 9.27634 28.8083 8.96061C29.4466 8.63777 29.9356 8.50006 30.24 8.50006V7.50006C29.9367 7.50006 29.4483 7.36126 28.8096 7.03593C28.1852 6.71792 27.4654 6.24668 26.7142 5.64384Z" fill="white"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M0 7.5L30 7.5L30 8.5L-8.74228e-08 8.5L0 7.5Z" fill="white"/>
+</svg>`
+  </script>
+  
+  {% stylesheet %}
+    /* enable Flickity by default */
+    .two-columns-carousel .flickity-viewport {
+      height: 100% !important;
+    }
+
+    .two-columns-carousel .flickity-buttons {
+      display: none;
+    }
+
+    .two-columns-carousel .flickity-button {
+      display: flex;
+      background-color: transparent;
+    }
+
+    .two-columns-carousel .flickity-button:hover {
+      background-color: transparent;
+    }
+
+    .two-columns-carousel .flickity-button:focus {
+      box-shadow: 0 0 0 0;
+    }
+
+    .two-columns-carousel .flickity-prev-next-button.previous {
+      left: -40px;
+      transform: translateY(-50px);
+    }
+
+    .two-columns-carousel .flickity-prev-next-button.next {
+      right: -40px;
+      transform: translateY(-50px);
+    }
+  {% endstylesheet %}

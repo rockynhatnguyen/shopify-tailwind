@@ -1,6 +1,30 @@
 {
-  "current": "Default",
+  "current": {
+    "sections": {
+      "header": {
+        "type": "header",
+        "settings": {
+          "show-top-menu": true,
+          "top-menu": "top-menu",
+          "menu": "main-menu",
+          "head-bg-color": "#85abbd",
+          "header-logo-layout": "exploded",
+          "header-logo": "shopify:\/\/shop_images\/LOGO_995168c8-1212-4b96-8c69-b00d7c8a662d.png",
+          "logo-message": "Parties? Fun. Planning them? Not so much. We curate ready-to-go kits that make throwing a party easy. No occasion necessary."
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "settings": {
+        }
+      }
+    },
+    "content_for_index": [
+
+    ]
+  },
   "presets": {
-    "Default": { }
+    "Default": {
+    }
   }
 }
